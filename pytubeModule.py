@@ -1,5 +1,11 @@
 from pytube import YouTube
 
-yt = YouTube('http://youtube.com/watch?v=2lAe1cqCOXo')
+yt = YouTube('https://youtu.be/GVAF07-2Xic')
 
-print(yt.title)
+counter = 0
+
+for stream in yt.streams.filter(type="audio", ):
+    type = stream.mime_type[6:]
+    stream.download(filename=str(counter) + "." + type)
+    print(stream)
+    counter += 1
