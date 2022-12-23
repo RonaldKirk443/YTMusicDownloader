@@ -14,4 +14,4 @@ while True:
     else:
         title = pytubeModule.download_video(plink, my_dir)
 
-    print("Videos downloaded succesfully")
+    print("Videos downloaded successfully")
