@@ -16,4 +16,5 @@ def downloadPlaylist(url: str, dir: str):
 if __name__ == "__main__":
     config = open("config.txt")
     my_dir = config.read()
-    downloadPlaylist('https://www.youtube.com/playlist?list=PLEbkAgZt4BIOuFJhHC-dV14IE2auWVeIU', my_dir)
+    plink = input("Playlist Link: ")
+    downloadPlaylist(plink, my_dir)
