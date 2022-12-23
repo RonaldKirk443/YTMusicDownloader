@@ -3,7 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <title>Pytube Downloader</title>
+    <link href="css/main.css" rel="stylesheet"/>
+    <link href="js/main.js" rel="script">
 </head>
 <body>
+    <main class="menu">
+        <h1>PyTube Downloader</h1>
+        <form action="">
+            <fieldset>
+                <legend>Youtube Playlist/Video Link</legend>
+                <input type="text" name="inputURL" placeholder="Youtube URL" required>
+                <button type="submit" class="submit">Show Table</button>
+            </fieldset>
+
+            <table>
+                <colgroup>
+                    <col span="1" class="one_col">
+                    <col span="2" class="two_col">
+                    <col span="3" class="three_col">
+                </colgroup>
+                <thead>
+                    <td></td>
+                    <td>Title</td>
+                    <td>Thumbnail</td>
+                </thead>
+                <tr>
+                    <td><input type="checkbox" name="" id=""></td>
+                    <td><label for=""></label></td>
+                    <td><label for=""><img src=""></label></td>
+                </tr>
+            </table>
+
+            <button type="submit" class="download">Download</button>
+        </form>
+    </main>
 </body>
 </html>
