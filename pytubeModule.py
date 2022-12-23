@@ -1,5 +1,8 @@
 from pytube import Playlist
 
+def filterIllegalChars():
+    pass
+
 def downloadPlaylist(url: str, dir: str):
     p = Playlist(url)
 
