@@ -1,11 +1,4 @@
 import pytubeModule
-import eel
-
-
-def init_eel():
-    eel.init('web')
-    eel.start('index.html', app_mode=True, mode="chrome")
-
 
 config = open("config.txt")
 my_dir = config.read()
@@ -17,7 +10,5 @@ if url.find("playlist") != -1:
 else:
     title = pytubeModule.get_title(url)
     print(title)
-
-init_eel()
 
 
