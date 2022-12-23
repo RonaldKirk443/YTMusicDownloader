@@ -1,11 +1,11 @@
-from pytube import YouTube
+from pytube import Playlist
 
-yt = YouTube('https://youtu.be/GVAF07-2Xic')
+p = Playlist('https://www.youtube.com/playlist?list=PLEbkAgZt4BIOuFJhHC-dV14IE2auWVeIU')
+config = open("config.txt")
+my_dir = config.read()
 
-counter = 0
-
-for stream in yt.streams.filter(type="audio", ):
-    type = stream.mime_type[6:]
-    stream.download(filename=str(counter) + "." + type)
-    print(stream)
-    counter += 1
+for vid in p.videos:
+    vid.use_oauth = True
+    vid.allow_oauth_cache = True
+    vid.streams.get_audio_only().download(output_path=my_dir, filename=vid.title + ".mp4", skip_existing=True)
+    print(f"{vid.title} has downloaded!")
