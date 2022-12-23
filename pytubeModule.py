@@ -1,4 +1,4 @@
-from pytube import Playlist
+from pytube import Playlist, YouTube
 
 
 def filterIllegalChars(title: str) -> str:
@@ -20,6 +20,12 @@ def downloadPlaylist(url: str, my_dir: str):
         title = filterIllegalChars(vid.title)
         vid.streams.get_audio_only().download(output_path=my_dir, filename=title + ".mp3", skip_existing=True)
         print(f"{vid.title} has downloaded!")
+
+def downloadVideo(url: str, my_dir: str):
+    vid = YouTube(url, use_oauth=True, allow_oauth_cache=True)
+    title = filterIllegalChars(vid.title)
+    vid.streams.get_audio_only().download(output_path=my_dir, filename=title + ".mp3", skip_existing=True)
+    print(f"{vid.title} has downloaded!")
 
 
 if __name__ == "__main__":
