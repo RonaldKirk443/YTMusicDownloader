@@ -6,7 +6,7 @@ def filterIllegalChars(title: str) -> str:
     new_title = title
 
     for char in chars:
-        new_title.replace(char, " ")
+        new_title = new_title.replace(char, "-")
 
     return new_title
 
