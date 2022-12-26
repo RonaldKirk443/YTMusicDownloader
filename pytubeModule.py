@@ -19,7 +19,6 @@ def download_playlist(url: str, my_dir: str):
         vid.allow_oauth_cache = True
         title = filter_illegal_chars(vid.title)
         vid.streams.get_audio_only().download(output_path=my_dir, filename=title + ".mp3", skip_existing=True)
-        print(f"{vid.title} has downloaded!")
 
 
 def get_links(url: str) -> list[str]:
