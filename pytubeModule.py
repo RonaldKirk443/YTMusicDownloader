@@ -36,14 +36,14 @@ def get_titles(url: str) -> list[str]:
     titles = []
 
     for vid in p.videos:
-        titles.append(vid.title)
+        titles.append(filter_illegal_chars(vid.title))
 
     return titles
 
 
 def get_title(url: str) -> str:
     yt = YouTube(url)
-    return yt.title
+    return filter_illegal_chars(yt.title)
 
 
 def download_video(url: str, my_dir: str):
