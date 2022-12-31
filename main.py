@@ -1,6 +1,6 @@
 import tkinter as tk
-from tkinter import ttk
 from ttkwidgets import CheckboxTreeview
+from tkinter import ttk
 import pytubeModule
 import threading
 import os
@@ -13,6 +13,7 @@ global_title_list = []
 # https://www.youtube.com/playlist?list=PLEbkAgZt4BIOuFJhHC-dV14IE2auWVeIU
 
 window = tk.Tk()
+window.title('PyTube Music Downloader')
 window.minsize(0, 700)
 
 
@@ -32,11 +33,15 @@ def grab_url():
     print(f"'{url}'")
 
     if url.find("playlist") != -1:
-        video_urls = pytubeModule.get_links(url)
-        video_titles = pytubeModule.get_titles(url)
+        video_urls = pytubeModule.get_playlist_links(url)
+        video_titles = pytubeModule.get_playlist_titles(url)
+        video_thumbnails = pytubeModule.get_playlist_thumbnails(url)
+        print(video_thumbnails)
     else:
         video_urls = [url]
         video_titles = [pytubeModule.get_title(url)]
+        video_thumbnails = [pytubeModule.get_video_thumbnail(url)]
+        print(video_thumbnails)
 
     for i in range(len(video_urls)):
         tree_table.insert(parent='', index='end', text="", tags="checked", values=(i+1, video_urls[i], video_titles[i], ""))
@@ -50,8 +55,10 @@ def download_selected():
     url_btn["state"] = tk.DISABLED
     download_btn["state"] = tk.DISABLED
     checked_ids = tree_table.get_checked()
+    total_id_count = len(checked_ids)
 
-    for item_id in checked_ids:
+    for i in range(total_id_count):
+        item_id = checked_ids[i]
         title = tree_table.item(item_id)["values"][2]
 
         if title not in global_title_list:
@@ -60,6 +67,7 @@ def download_selected():
             pytubeModule.download_video(url, my_dir)
             global_title_list.append(title)
 
+        progress_bar['value'] = (i + 1) / total_id_count * 100
         tree_table.item(item_id, values=(tree_table.item(item_id)["values"][0],
                                          tree_table.item(item_id)["values"][1],
                                          tree_table.item(item_id)["values"][2],
@@ -112,10 +120,9 @@ bottom_frame = tk.LabelFrame(master=window, height=100, borderwidth=5)
 bottom_frame.grid(row=2, column=0)
 bottom_frame.columnconfigure(1, minsize=553)
 
-# progress_bar = ttk.Progressbar(master=bottom_frame, orient='horizontal', mode='determinate', length=684)
-# progress_bar.grid(row=0, column=0, columnspan=3, padx=3)
-# progress_bar['mode'] = 'determinate'
-# progress_bar.start()
+progress_bar = ttk.Progressbar(master=bottom_frame, orient='horizontal', mode='determinate', length=684)
+progress_bar.grid(row=0, column=0, columnspan=3, padx=3)
+progress_bar['mode'] = 'determinate'
 
 status_text_lbl = tk.Label(master=bottom_frame, borderwidth=3, text="Status:", anchor="w")
 status_text_lbl.grid(row=1, column=0, padx=3, sticky="w")

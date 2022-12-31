@@ -21,7 +21,7 @@ def download_playlist(url: str, my_dir: str):
         vid.streams.get_audio_only().download(output_path=my_dir, filename=title + ".mp3", skip_existing=True)
 
 
-def get_links(url: str) -> list[str]:
+def get_playlist_links(url: str) -> list[str]:
     p = Playlist(url)
     urls = []
 
@@ -31,7 +31,22 @@ def get_links(url: str) -> list[str]:
     return urls
 
 
-def get_titles(url: str) -> list[str]:
+def get_playlist_thumbnails(url: str) -> list[str]:
+    p = Playlist(url)
+    urls = []
+
+    for vid in p.videos:
+        urls.append(vid.thumbnail_url)
+
+    return urls
+
+
+def get_video_thumbnail(url: str) -> str:
+    yt = YouTube(url)
+    return yt.thumbnail_url
+
+
+def get_playlist_titles(url: str) -> list[str]:
     p = Playlist(url)
     titles = []
 
