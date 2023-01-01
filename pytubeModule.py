@@ -1,3 +1,4 @@
+import pytube.exceptions
 from pytube import Playlist, YouTube
 
 
@@ -64,8 +65,14 @@ def get_title(url: str) -> str:
 def download_video(url: str, my_dir: str):
     vid = YouTube(url, use_oauth=True, allow_oauth_cache=True)
     title = filter_illegal_chars(vid.title)
-    vid.streams.get_audio_only().download(output_path=my_dir, filename=title + ".mp3", skip_existing=True)
-    print(f"{vid.title} has downloaded!")
+    try:
+        vid.streams.get_audio_only().download(output_path=my_dir, filename=title + ".mp3", skip_existing=True)
+        return "Downloaded"
+    except pytube.exceptions.AgeRestrictedError:
+        return "Age Restricted"
+    except:
+        return "Unknown Error"
+
 
 
 if __name__ == "__main__":
