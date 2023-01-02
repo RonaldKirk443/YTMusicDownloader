@@ -70,6 +70,12 @@ def download_video(url: str, my_dir: str):
         return "Downloaded"
     except pytube.exceptions.AgeRestrictedError:
         return "Age Restricted"
+    except pytube.exceptions.VideoPrivate:
+        return "Private Video"
+    except pytube.exceptions.VideoRegionBlocked:
+        return "Region Block"
+    except pytube.exceptions.VideoUnavailable:
+        return "Video Unavailable"
     except:
         return "Unknown Error"
 
