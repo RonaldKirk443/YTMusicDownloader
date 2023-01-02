@@ -63,7 +63,7 @@ def get_title(url: str) -> str:
 
 
 def download_video(url: str, my_dir: str):
-    vid = YouTube(url, use_oauth=True, allow_oauth_cache=True)
+    vid = YouTube(url)
     title = filter_illegal_chars(vid.title)
     try:
         vid.streams.get_audio_only().download(output_path=my_dir, filename=title + ".mp3", skip_existing=True)
@@ -77,7 +77,7 @@ def download_video(url: str, my_dir: str):
     except pytube.exceptions.VideoUnavailable:
         return "Video Unavailable"
     except:
-        return "Unknown Error"
+        return "Download Error"
 
 
 

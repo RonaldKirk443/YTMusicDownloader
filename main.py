@@ -96,7 +96,8 @@ def download_selected():
             status_lbl["text"] = f"Downloading {title}"
             url = tree_table.item(item_id)["values"][1]
             status = pytubeModule.download_video(url, my_dir)
-            global_title_list.append(title)
+            if status == "Downloaded":
+                global_title_list.append(title)
 
         progress_bar['value'] = (i + 1) / total_id_count * 100
         tree_table.item(item_id, values=(tree_table.item(item_id)["values"][0],
