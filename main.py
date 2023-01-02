@@ -118,7 +118,6 @@ url_label = tk.Label(master=top_frame, borderwidth=3, text="Enter playlist URL:"
 url_label.grid(row=0, column=0, padx=3)
 
 url_entry = tk.Entry(master=top_frame, borderwidth=3, width=80, bg="white", fg="black")
-url_entry.insert(0, "https://www.youtube.com/watch?v=yoHR8qwuqmY&list=PLEbkAgZt4BIMaRBbBJy_HbQyf5w2-cnCr&index=77")
 url_entry.grid(row=0, column=1, padx=3)
 
 url_btn = tk.Button(master=top_frame, borderwidth=3, width=10, text="Submit", command=lambda: threading.Thread(target=grab_url).start())
